@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import firebase_admin
+from firebase_admin import credentials
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +132,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Firebase config
+
+FIREBASE_CRED = credentials.Certificate('keys/landing-key.json')
+
+firebase_admin.initialize_app(FIREBASE_CRED, {
+    'databaseURL':'https://landing-dcd0b-default-rtdb.firebaseio.com/'
+})
